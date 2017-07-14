@@ -1,0 +1,151 @@
+{
+  "gateway": {
+    "name": "3recipe",
+    "version": "1.0.0",
+    "description": "This is the first microgateway app",
+    "configurations": [
+      {
+        "name": "kafkaConfig",
+        "type": "github.com/TIBCOSoftware/flogo-contrib/trigger/kafkasub",
+        "description": "Configuration for kafka cluster",
+        "settings": {
+          "BrokerUrl": "localhost:9092"
+        }
+      }
+    ],
+    "triggers": [
+      {
+        "name": "Trigger1",
+        "description": "The trigger on kafka 'users' topic",
+        "type": "github.com/TIBCOSoftware/flogo-contrib/trigger/kafkasub",
+        "settings": {
+          "Topic": "syslog",
+          "config": "${configurations.kafkaConfig}"
+        }
+      },
+      {
+        "name": "Trigger2",
+        "description": "The trigger on kafka 'users' topic",
+        "type": "github.com/TIBCOSoftware/flogo-contrib/trigger/kafkasub",
+        "settings": {
+          "Topic": "syslog",
+          "config": "${configurations.kafkaConfig}"
+        }
+      },
+      {
+        "name": "Trigger3",
+        "description": "The trigger on kafka 'users' topic",
+        "type": "github.com/TIBCOSoftware/flogo-contrib/trigger/kafkasub",
+        "settings": {
+          "Topic": "syslog",
+          "config": "${configurations.kafkaConfig}"
+        }
+      },
+      {
+        "name": "Trigger4",
+        "description": "The trigger on kafka 'users' topic",
+        "type": "github.com/TIBCOSoftware/flogo-contrib/trigger/kafkasub",
+        "settings": {
+          "Topic": "syslog",
+          "config": "${configurations.kafkaConfig}"
+        }
+      }
+    ],
+    "event_handlers": [
+      {
+        "name": "Handler1",
+        "description": "Handle the user access",
+        "reference": "github.com/ykalidin/sampleRepo/Recipe1.json",
+        "params": {
+        }
+      },
+      {
+        "name": "Handler2",
+        "description": "Handle the user access",
+        "reference": "github.com/ykalidin/sampleRepo/Recipe1.json",
+        "params": {
+        }
+      },
+      {
+        "name": "Handler3",
+        "description": "Handle the user access",
+        "reference": "github.com/ykalidin/sampleRepo/Recipe1.json",
+        "params": {
+        }
+      },
+      {
+        "name": "Handler4",
+        "description": "Handle the user access",
+        "reference": "github.com/ykalidin/sampleRepo/Recipe1.json",
+        "params": {
+        }
+      }
+    ],
+    "event_links": [
+      {
+        "triggers": [
+          "Trigger1"
+        ],
+        "dispatches": [
+
+          {
+            "if": "trigger.content != undefined",
+            "handler": "Handler1"
+          },
+          {
+            "if": "trigger.content != undefined",
+            "handler": "Handler2"
+          }
+        ]
+      },
+      {
+        "triggers": [
+          "Trigger2"
+        ],
+        "dispatches": [
+
+          {
+            "if": "trigger.content != undefined",
+            "handler": "Handler2"
+          },
+          {
+            "if": "trigger.content != undefined",
+            "handler": "Handler3"
+          }
+        ]
+      },
+      {
+        "triggers": [
+          "Trigger3"
+        ],
+        "dispatches": [
+
+          {
+            "if": "trigger.content != undefined",
+            "handler": "Handler3"
+          },
+          {
+            "if": "trigger.content != undefined",
+            "handler": "Handler1"
+          }
+        ]
+      },
+      {
+        "triggers": [
+          "Trigger4"
+        ],
+        "dispatches": [
+
+          {
+            "if": "trigger.content != undefined",
+            "handler": "Handler1"
+          },
+          {
+            "if": "trigger.content != undefined",
+            "handler": "Handler3"
+          }
+        ]
+      }
+    ]
+  }
+}
